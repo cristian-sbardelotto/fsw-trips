@@ -3,7 +3,7 @@ import CurrencyInput from './CurrencyInput';
 import DatePicker from './DatePicker';
 import Input from './Input';
 
-export function TripSearch() {
+export default function TripSearch() {
   return (
     <div className='container mx-auto p-5 bg-world-map bg-cover bg-center bg-no-repeat'>
       <h1 className='font-semibold text-2xl text-primary-dark text-center'>
