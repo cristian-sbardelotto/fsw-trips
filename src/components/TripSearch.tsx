@@ -5,7 +5,7 @@ import Input from './Input';
 
 export function TripSearch() {
   return (
-    <div className='container mx-auto p-5'>
+    <div className='container mx-auto p-5 bg-world-map bg-cover bg-center bg-no-repeat'>
       <h1 className='font-semibold text-2xl text-primary-dark text-center'>
         Encontre sua próxima <span className='text-primary'>viagem!</span>
       </h1>
