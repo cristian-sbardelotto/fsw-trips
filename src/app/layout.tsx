@@ -2,6 +2,7 @@ import { NextAuthProvider } from '@/providers/auth';
 import { Poppins } from 'next/font/google';
 import './globals.css';
 
+import { Header } from '@/components/Header';
 import { ChildrenComponentProps } from '@/types';
 
 const poppins = Poppins({
@@ -18,7 +19,11 @@ export default function RootLayout({ children }: ChildrenComponentProps) {
   return (
     <html lang='en'>
       <body className={poppins.className}>
-        <NextAuthProvider>{children}</NextAuthProvider>
+        <NextAuthProvider>
+          <Header />
+
+          {children}
+        </NextAuthProvider>
       </body>
     </html>
   );
