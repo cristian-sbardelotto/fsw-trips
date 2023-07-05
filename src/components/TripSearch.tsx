@@ -1,3 +1,4 @@
+import CurrencyInput from './CurrencyInput';
 import DatePicker from './DatePicker';
 import Input from './Input';
 
@@ -15,8 +16,9 @@ export function TripSearch() {
           <DatePicker
             placeholderText='Data de ida'
             onChange={() => {}}
+            className='w-full'
           />
-          <Input placeholder='Orçamento' />
+          <CurrencyInput placeholder='Orçamento' />
         </div>
       </div>
     </div>
