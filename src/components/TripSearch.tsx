@@ -1,3 +1,4 @@
+import DatePicker from './DatePicker';
 import Input from './Input';
 
 export function TripSearch() {
@@ -10,8 +11,11 @@ export function TripSearch() {
       <div className='flex flex-col gap-4 mt-5'>
         <Input placeholder='Onde você quer ir?' />
 
-        <div className='flex gap-4 flex-wrap'>
-          <Input placeholder='Data de ida' />
+        <div className='flex gap-4'>
+          <DatePicker
+            placeholderText='Data de ida'
+            onChange={() => {}}
+          />
           <Input placeholder='Orçamento' />
         </div>
       </div>

@@ -2,10 +2,9 @@ import { ComponentPropsWithoutRef, LegacyRef, forwardRef } from 'react';
 
 import { twMerge } from 'tailwind-merge';
 
-interface InputProps extends ComponentPropsWithoutRef<'input'> {
-  error?: boolean;
-  errorMessage?: string;
-}
+import { InputErrorProps } from '@/types';
+
+type InputProps = InputErrorProps & ComponentPropsWithoutRef<'input'>;
 
 function Input(
   { className, error, errorMessage, ...props }: InputProps,
