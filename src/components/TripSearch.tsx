@@ -1,3 +1,4 @@
+import Button from './Button';
 import CurrencyInput from './CurrencyInput';
 import DatePicker from './DatePicker';
 import Input from './Input';
@@ -20,6 +21,8 @@ export function TripSearch() {
           />
           <CurrencyInput placeholder='Orçamento' />
         </div>
+
+        <Button>Buscar</Button>
       </div>
     </div>
   );
