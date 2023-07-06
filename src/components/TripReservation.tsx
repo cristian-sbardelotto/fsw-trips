@@ -48,6 +48,7 @@ export default function TripReservation({ trip }: TripReservationProps) {
               errorMessage={errors.startDate?.message}
               placeholderText='Data de Início'
               className='w-full'
+              minDate={trip.startDate}
             />
           )}
         />
@@ -69,6 +70,7 @@ export default function TripReservation({ trip }: TripReservationProps) {
               errorMessage={errors.endDate?.message}
               placeholderText='Data Final'
               className='w-full'
+              maxDate={trip.endDate}
             />
           )}
         />
