@@ -1,4 +1,5 @@
 import TripDetailsHeader from '@/components/TripDetailsHeader';
+import TripReservation from '@/components/TripReservation';
 import { prisma } from '@/lib/prisma';
 
 type TripDetailsProps = {
@@ -21,6 +22,7 @@ export default async function TripDetails({ params }: TripDetailsProps) {
   return (
     <div className='container mx-auto'>
       <TripDetailsHeader trip={trip} />
+      <TripReservation trip={trip} />
     </div>
   );
 }
