@@ -2,7 +2,7 @@ import { Trip } from '@prisma/client';
 import TripItem from './TripItem';
 
 export default async function RecommendedTrips() {
-  const trips: Trip[] = await fetch('http://localhost:3000/api/hello').then(
+  const trips: Trip[] = await fetch('http://localhost:3000/api/trips').then(
     response => response.json()
   );
 
@@ -19,10 +19,10 @@ export default async function RecommendedTrips() {
       </div>
 
       <div className='flex flex-col items-center mt-5 gap-5'>
-        {trips.map(item => (
+        {trips.map(trip => (
           <TripItem
-            trip={item}
-            key={item.name}
+            trip={trip}
+            key={trip.name}
           />
         ))}
       </div>

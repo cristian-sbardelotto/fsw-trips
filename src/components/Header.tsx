@@ -51,7 +51,7 @@ export function Header() {
           />
 
           {isMenuOpen && (
-            <div className='flex flex-col justify-center items-center absolute top-14 left-0 w-full h-full bg-white rounded shadow-md'>
+            <div className='z-50 flex flex-col justify-center items-center absolute top-14 left-0 w-full h-full bg-white rounded shadow-md'>
               <button
                 className='text-primary text-sm font-semibold'
                 onClick={handleLogout}
