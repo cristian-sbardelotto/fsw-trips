@@ -2,6 +2,7 @@ import { NextAuthProvider } from '@/providers/auth';
 import { Poppins } from 'next/font/google';
 import './globals.css';
 
+import Footer from '@/components/Footer';
 import { Header } from '@/components/Header';
 import { ChildrenComponentProps } from '@/types';
 
@@ -23,6 +24,8 @@ export default function RootLayout({ children }: ChildrenComponentProps) {
           <Header />
 
           {children}
+
+          <Footer />
         </NextAuthProvider>
       </body>
     </html>
