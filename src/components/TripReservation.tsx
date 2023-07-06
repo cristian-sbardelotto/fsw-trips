@@ -22,11 +22,14 @@ export default function TripReservation({ trip }: TripReservationProps) {
     handleSubmit,
     formState: { errors },
     control,
+    watch,
   } = useForm<FormProps>();
 
   function onSubmit(data: any) {
     console.log({ data });
   }
+
+  const startDate = watch('startDate');
 
   return (
     <div className='flex flex-col px-5'>
@@ -49,6 +52,7 @@ export default function TripReservation({ trip }: TripReservationProps) {
               placeholderText='Data de Início'
               className='w-full'
               minDate={trip.startDate}
+              maxDate={trip.endDate}
             />
           )}
         />
@@ -70,6 +74,7 @@ export default function TripReservation({ trip }: TripReservationProps) {
               errorMessage={errors.endDate?.message}
               placeholderText='Data Final'
               className='w-full'
+              minDate={startDate ?? trip.startDate}
               maxDate={trip.endDate}
             />
           )}
