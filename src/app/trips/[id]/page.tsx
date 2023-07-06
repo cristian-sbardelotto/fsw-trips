@@ -1,5 +1,6 @@
 import TripDescription from '@/components/TripDescription';
 import TripDetailsHeader from '@/components/TripDetailsHeader';
+import TripHighlights from '@/components/TripHighlights';
 import TripReservation from '@/components/TripReservation';
 import { prisma } from '@/lib/prisma';
 
@@ -25,6 +26,7 @@ export default async function TripDetails({ params }: TripDetailsProps) {
       <TripDetailsHeader trip={trip} />
       <TripReservation trip={trip} />
       <TripDescription tripDescription={trip.description} />
+      <TripHighlights highlights={trip.highlights} />
     </div>
   );
 }
