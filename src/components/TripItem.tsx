@@ -14,8 +14,6 @@ export default function TripItem({ trip }: TripItemProps) {
         <Image
           src={trip.coverImage}
           alt={trip.name}
-          width={280}
-          height={280}
           style={{
             objectFit: 'cover',
           }}
