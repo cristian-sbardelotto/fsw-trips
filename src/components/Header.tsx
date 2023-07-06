@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { signIn, signOut, useSession } from 'next-auth/react';
 import Image from 'next/image';
 
+import Link from 'next/link';
 import { AiOutlineMenu } from 'react-icons/ai';
 
 function handleLogin() {
@@ -27,12 +28,14 @@ export function Header() {
 
   return (
     <header className='container mx-auto px-5 h-[93px] flex justify-between items-center'>
-      <Image
-        src='/fsw-logo.svg'
-        alt='Full Stack Week Logo Image'
-        width={183}
-        height={32}
-      />
+      <Link href='/'>
+        <Image
+          src='/fsw-logo.svg'
+          alt='Full Stack Week Logo Image'
+          width={183}
+          height={32}
+        />
+      </Link>
 
       {isUserLogged && data?.user ? (
         <div className='flex items-center gap-3 border border-gray-light p-3 rounded-full relative'>
