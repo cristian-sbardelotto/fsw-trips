@@ -48,7 +48,7 @@ export default function UserReservationCard({
         </div>
 
         <div className='flex flex-col mt-5 text-primary-dark'>
-          <h3 className='text-sm'>Data</h3>
+          <h3 className='text-sm font-semibold'>Data</h3>
 
           <div className='flex items-center gap-1'>
             <p className='text-sm'>
@@ -64,7 +64,7 @@ export default function UserReservationCard({
             </p>
           </div>
 
-          <h3 className='mt-5 text-sm'>Hóspedes</h3>
+          <h3 className='mt-5 text-sm font-semibold'>Hóspedes</h3>
 
           <p className='text-sm pb-5'>{reservation.guests} hóspedes</p>
 

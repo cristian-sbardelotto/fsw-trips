@@ -20,8 +20,6 @@ export async function GET(
     };
   }
 
-  console.log({ id });
-
   const reservations = await prisma.tripReservation.findMany({
     where: {
       userId: id,
