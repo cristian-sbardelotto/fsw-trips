@@ -1,8 +1,11 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
+
 import { Trip } from '@prisma/client';
 import { differenceInDays } from 'date-fns';
 import { Controller, useForm } from 'react-hook-form';
+
 import Button from './Button';
 import DatePicker from './DatePicker';
 import Input from './Input';
@@ -26,6 +29,8 @@ export default function TripReservation({ trip }: TripReservationProps) {
     watch,
     setError,
   } = useForm<FormProps>();
+
+  const router = useRouter();
 
   async function onSubmit(data: FormProps) {
     const response = await fetch('http://localhost:3000/api/trips/check', {
@@ -60,6 +65,14 @@ export default function TripReservation({ trip }: TripReservationProps) {
       return setFormError('startDate', 'Data inválida');
     if (res?.error?.code === 'INVALID_END_DATE')
       return setFormError('endDate', 'Data inválida');
+
+    const confirmationUrl = `/trips/${
+      trip.id
+    }/confirmation?startDate=${data.startDate?.toISOString()}&endDate=${data.endDate?.toISOString()}&guests=${
+      data.guests
+    }`;
+
+    router.push(confirmationUrl);
   }
 
   const startDate = watch('startDate');
