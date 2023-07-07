@@ -13,10 +13,12 @@ type UserReservationCardProps = {
   reservation: Prisma.TripReservationGetPayload<{
     include: { trip: true };
   }>;
+  fetchReservations: () => void;
 };
 
 export default function UserReservationCard({
   reservation,
+  fetchReservations,
 }: UserReservationCardProps) {
   const { trip } = reservation;
 
@@ -32,7 +34,7 @@ export default function UserReservationCard({
     }
 
     toast.success('Reserva cancelada com sucesso!', { position: 'top-right' });
-    router.replace('/');
+    fetchReservations();
   }
 
   return (

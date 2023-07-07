@@ -19,21 +19,21 @@ export default function MyTrips() {
   const { data, status } = useSession();
   const router = useRouter();
 
+  async function fetchReservations() {
+    const response = await fetch(
+      `http://localhost:3000/api/user/${(data?.user as any)?.id}/reservations`
+    ).then(response => response.json());
+
+    setReservations(response);
+  }
+
   useEffect(() => {
     if (status === 'unauthenticated') {
-      router.push('/');
+      return router.push('/');
     }
 
-    async function getUserReservations() {
-      const reservations = await fetch(
-        `http://localhost:3000/api/user/${(data?.user as any).id}/reservations`
-      ).then(response => response.json());
-
-      setReservations(reservations);
-    }
-
-    getUserReservations();
-  }, [router, status]);
+    fetchReservations();
+  }, [status]);
 
   return (
     <div className='container mx-auto p-5'>
@@ -42,10 +42,11 @@ export default function MyTrips() {
       </h1>
 
       {reservations.length > 0 ? (
-        reservations.map(reservation => (
+        reservations?.map(reservation => (
           <UserReservationCard
             key={reservation.id}
             reservation={reservation}
+            fetchReservations={fetchReservations}
           />
         ))
       ) : (
