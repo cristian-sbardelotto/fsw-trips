@@ -2,7 +2,7 @@ import { ComponentPropsWithoutRef } from 'react';
 import { twMerge } from 'tailwind-merge';
 
 type ButtonProps = ComponentPropsWithoutRef<'button'> & {
-  variant?: 'primary' | 'outline';
+  variant?: 'primary' | 'outline' | 'danger';
 };
 
 export default function Button({
