@@ -9,6 +9,7 @@ import TripConfirmationCard from '@/components/TripConfirmationCard';
 import { Trip } from '@prisma/client';
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
+import { toast } from 'react-toastify';
 
 type TripConfirmationProps = {
   params: {
@@ -20,7 +21,7 @@ export default function TripConfirmation({ params }: TripConfirmationProps) {
   const [trip, setTrip] = useState<Trip>();
   const [totalPrice, setTotalPrice] = useState(0);
 
-  const { status } = useSession();
+  const { data, status } = useSession();
   const router = useRouter();
 
   const searchParams = useSearchParams();
@@ -57,6 +58,37 @@ export default function TripConfirmation({ params }: TripConfirmationProps) {
 
   if (!trip) return null;
 
+  async function handleFinishPurchase() {
+    const response = await fetch(
+      `http://localhost:3000/api/trips/reservation`,
+      {
+        method: 'POST',
+        body: Buffer.from(
+          JSON.stringify({
+            userId: (data?.user as any).id,
+            tripId: params.id,
+            totalPaid: totalPrice,
+            startDate: searchParams.get('startDate'),
+            endDate: searchParams.get('endDate'),
+            guests: Number(searchParams.get('guests')),
+          })
+        ),
+      }
+    );
+
+    if (!response.ok) {
+      return toast.error('Ocorreu um erro ao realizar a reserva!', {
+        position: 'top-right',
+      });
+    }
+
+    router.push('/');
+
+    toast.success('Reserva realizada com sucesso!', {
+      position: 'top-right',
+    });
+  }
+
   return (
     <div className='container mx-auto p-5'>
       <h1 className='font-semibold text-xl text-primary-dark'>Sua viagem</h1>
@@ -78,7 +110,12 @@ export default function TripConfirmation({ params }: TripConfirmationProps) {
         <h3 className='font-semibold mt-5'>Hóspedes</h3>
         <p>{guests} hóspedes</p>
 
-        <Button className='mt-5'>Finalizar Compra</Button>
+        <Button
+          className='mt-5'
+          onClick={handleFinishPurchase}
+        >
+          Finalizar Compra
+        </Button>
       </div>
     </div>
   );
