@@ -15,6 +15,8 @@ export default function Button({
     primary: 'bg-primary text-white hover:bg-primary-dark',
     outline:
       'bg-transparent border-2 border-primary text-primary hover:bg-primary hover:text-white',
+    danger:
+      'border border-red-500 text-red-500 hover:bg-red-600 bg-transparent hover:text-white',
   };
 
   const buttonClassName = twMerge(
