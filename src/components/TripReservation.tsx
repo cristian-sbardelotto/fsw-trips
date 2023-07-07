@@ -26,8 +26,21 @@ export default function TripReservation({ trip }: TripReservationProps) {
     watch,
   } = useForm<FormProps>();
 
-  function onSubmit(data: any) {
-    console.log({ data });
+  async function onSubmit(data: FormProps) {
+    const response = await fetch('http://localhost:3000/api/trips/check', {
+      method: 'POST',
+      body: Buffer.from(
+        JSON.stringify({
+          startDate: data.startDate,
+          endDate: data.endDate,
+          tripId: trip.id,
+        })
+      ),
+    });
+
+    const res = await response.json();
+
+    console.log({ res });
   }
 
   const startDate = watch('startDate');
