@@ -1,8 +1,11 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
+
 import { Trip } from '@prisma/client';
 import { differenceInDays } from 'date-fns';
 import { Controller, useForm } from 'react-hook-form';
+
 import Button from './Button';
 import DatePicker from './DatePicker';
 import Input from './Input';
@@ -24,7 +27,10 @@ export default function TripReservation({ trip }: TripReservationProps) {
     formState: { errors },
     control,
     watch,
+    setError,
   } = useForm<FormProps>();
+
+  const router = useRouter();
 
   async function onSubmit(data: FormProps) {
     const response = await fetch('http://localhost:3000/api/trips/check', {
@@ -40,7 +46,33 @@ export default function TripReservation({ trip }: TripReservationProps) {
 
     const res = await response.json();
 
-    console.log({ res });
+    function setFormError(
+      inputName: 'startDate' | 'endDate' | 'guests',
+      message: string
+    ) {
+      return setError(inputName, {
+        type: 'manual',
+        message,
+      });
+    }
+
+    if (res?.error?.code === 'TRIP_ALREADY_RESERVED') {
+      setFormError('startDate', 'Esta data já está reservada.');
+      return setFormError('endDate', 'Esta data já está reservada.');
+    }
+
+    if (res?.error?.code === 'INVALID_START_DATE')
+      return setFormError('startDate', 'Data inválida');
+    if (res?.error?.code === 'INVALID_END_DATE')
+      return setFormError('endDate', 'Data inválida');
+
+    const confirmationUrl = `/trips/${
+      trip.id
+    }/confirmation?startDate=${data.startDate?.toISOString()}&endDate=${data.endDate?.toISOString()}&guests=${
+      data.guests
+    }`;
+
+    router.push(confirmationUrl);
   }
 
   const startDate = watch('startDate');
@@ -73,7 +105,7 @@ export default function TripReservation({ trip }: TripReservationProps) {
               placeholderText='Data de Início'
               className='w-full'
               minDate={trip.startDate}
-              maxDate={trip.endDate}
+              maxDate={endDate ?? trip.endDate}
             />
           )}
         />
@@ -108,11 +140,16 @@ export default function TripReservation({ trip }: TripReservationProps) {
             value: true,
             message: 'O número de hóspedes é obrigatório.',
           },
+          max: {
+            value: trip.maxGuests,
+            message: `Número de hóspedes não pode ser maior que ${trip.maxGuests}.`,
+          },
         })}
         error={!!errors.guests}
         errorMessage={errors?.guests?.message}
         placeholder={`Número de hóspedes (max: ${trip.maxGuests})`}
         className='mt-4'
+        type='number'
       />
 
       <div className='flex justify-between mt-3'>

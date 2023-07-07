@@ -26,7 +26,7 @@ function DatePicker(
   return (
     <div className='flex flex-col w-full'>
       <ReactDatePicker
-        dateFormat='DD/MM/yyyy'
+        dateFormat='dd/MM/yyyy'
         locale='pt-BR'
         wrapperClassName='w-full'
         className={datePickerClassName}

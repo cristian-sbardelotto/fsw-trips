@@ -1,9 +1,12 @@
 import { NextAuthProvider } from '@/providers/auth';
+import ToastProvider from '@/providers/toast';
+
 import { Poppins } from 'next/font/google';
 import './globals.css';
 
 import Footer from '@/components/Footer';
 import { Header } from '@/components/Header';
+
 import { ChildrenComponentProps } from '@/types';
 
 const poppins = Poppins({
@@ -21,11 +24,13 @@ export default function RootLayout({ children }: ChildrenComponentProps) {
     <html lang='en'>
       <body className={poppins.className}>
         <NextAuthProvider>
-          <Header />
+          <ToastProvider>
+            <Header />
 
-          {children}
+            {children}
 
-          <Footer />
+            <Footer />
+          </ToastProvider>
         </NextAuthProvider>
       </body>
     </html>
