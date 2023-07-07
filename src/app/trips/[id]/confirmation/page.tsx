@@ -1,11 +1,13 @@
 'use client';
 
-import Image from 'next/image';
 import { useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
+import Button from '@/components/Button';
+import TripConfirmationCard from '@/components/TripConfirmationCard';
 import { Trip } from '@prisma/client';
-import ReactCountryFlag from 'react-country-flag';
+import { format } from 'date-fns';
+import { ptBR } from 'date-fns/locale';
 
 type TripConfirmationProps = {
   params: {
@@ -18,6 +20,10 @@ export default function TripConfirmation({ params }: TripConfirmationProps) {
   const [totalPrice, setTotalPrice] = useState(0);
 
   const searchParams = useSearchParams();
+
+  const startDate = new Date(searchParams.get('startDate') as string);
+  const endDate = new Date(searchParams.get('endDate') as string);
+  const guests = searchParams.get('guests');
 
   useEffect(() => {
     async function fetchTrip() {
@@ -42,35 +48,27 @@ export default function TripConfirmation({ params }: TripConfirmationProps) {
   if (!trip) return null;
 
   return (
-    <div className='container mx-auto'>
+    <div className='container mx-auto p-5'>
       <h1 className='font-semibold text-xl text-primary-dark'>Sua viagem</h1>
 
-      <div className='flex flex-col p-5 mt-5 border-grayLighter border-solid border shadow-lg rounded-lg'>
-        <div className='flex items-center gap-3 pb-5 border-b border-grayLighter border-solid'>
-          <div className='relative h-[106px] w-[124px]'>
-            <Image
-              src={trip.coverImage}
-              fill
-              className='rounded-lg object-cover'
-              alt={trip.name}
-            />
-          </div>
+      <TripConfirmationCard
+        trip={trip}
+        totalPrice={totalPrice}
+      />
 
-          <div className='flex flex-col'>
-            <h2 className='text-xl text-primaryDarker font-semibold'>
-              {trip.name}
-            </h2>
-            <div className='flex items-center gap-1'>
-              <ReactCountryFlag
-                countryCode={trip.countryCode}
-                svg
-              />
-              <p className='text-xs text-grayPrimary underline'>
-                {trip.location}
-              </p>
-            </div>
-          </div>
+      <div className='flex flex-col mt-5 text-primary-dark'>
+        <h3 className='font-semibold'>Data</h3>
+
+        <div className='flex items-center gap-1 mt-1'>
+          <p>{format(startDate, "dd 'de' MMMM", { locale: ptBR })}</p>
+          {' - '}
+          <p>{format(endDate, "dd 'de' MMMM", { locale: ptBR })}</p>
         </div>
+
+        <h3 className='font-semibold mt-5'>Hóspedes</h3>
+        <p>{guests} hóspedes</p>
+
+        <Button className='mt-5'>Finalizar Compra</Button>
       </div>
     </div>
   );
