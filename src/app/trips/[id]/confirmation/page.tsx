@@ -1,6 +1,7 @@
 'use client';
 
-import { useSearchParams } from 'next/navigation';
+import { useSession } from 'next-auth/react';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 import Button from '@/components/Button';
@@ -18,6 +19,9 @@ type TripConfirmationProps = {
 export default function TripConfirmation({ params }: TripConfirmationProps) {
   const [trip, setTrip] = useState<Trip>();
   const [totalPrice, setTotalPrice] = useState(0);
+
+  const { status } = useSession();
+  const router = useRouter();
 
   const searchParams = useSearchParams();
 
@@ -42,8 +46,10 @@ export default function TripConfirmation({ params }: TripConfirmationProps) {
       setTotalPrice(totalPrice);
     }
 
+    if (status === 'unauthenticated') return router.push('/');
+
     fetchTrip();
-  }, [params.id, searchParams]);
+  }, [params.id, router, searchParams, status]);
 
   if (!trip) return null;
 
