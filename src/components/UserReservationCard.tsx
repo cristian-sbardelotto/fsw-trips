@@ -25,9 +25,12 @@ export default function UserReservationCard({
   const router = useRouter();
 
   async function handleDeleteReservation() {
-    const response = await fetch(`/api/trips/reservation/${reservation.id}`, {
-      method: 'DELETE',
-    });
+    const response = await fetch(
+      `${process.env.HOST_URL}api/trips/reservation/${reservation.id}`,
+      {
+        method: 'DELETE',
+      }
+    );
 
     if (!response.ok) {
       return toast.error('Ocorreu um erro ao cancelar a reserva!');

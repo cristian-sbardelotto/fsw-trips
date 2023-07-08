@@ -21,7 +21,7 @@ export default function MyTrips() {
 
   async function fetchReservations() {
     const response = await fetch(
-      `/api/user/${(data?.user as any)?.id}/reservations`
+      `${process.env.HOST_URL}api/user/${(data?.user as any)?.id}/reservations`
     ).then(response => response.json());
 
     setReservations(response);
