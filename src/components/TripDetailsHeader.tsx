@@ -21,7 +21,7 @@ export default function TripDetailsHeader({ trip }: TripDetailsHeader) {
       <div className='flex flex-col p-5'>
         <h1 className='font-semibold text-xl text-primary-dark'>{trip.name}</h1>
 
-        <div className='flex-items-center gap-1 my-1'>
+        <div className='flex items-center gap-1 my-1'>
           <ReactCountryFlag
             countryCode={trip.countryCode}
             svg
