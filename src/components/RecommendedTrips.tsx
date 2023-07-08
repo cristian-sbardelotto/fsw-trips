@@ -2,8 +2,8 @@ import { Trip } from '@prisma/client';
 import TripItem from './TripItem';
 
 export default async function RecommendedTrips() {
-  const trips: Trip[] = await fetch('http://localhost:3000/api/trips').then(
-    response => response.json()
+  const trips: Trip[] = await fetch('/api/trips').then(response =>
+    response.json()
   );
 
   return (
