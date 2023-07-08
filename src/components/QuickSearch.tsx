@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default function QuickSearch() {
   return (
@@ -14,48 +15,80 @@ export default function QuickSearch() {
       </div>
 
       <div className='flex items-center justify-between w-full mt-5'>
-        <div className='flex flex-col'>
-          <Image
-            src='/hotel-icon.png'
-            alt='Hotel Icon'
-            width={35}
-            height={35}
-          />
+        <div className='group flex flex-col'>
+          <Link
+            href='/trips/search?text=Hotel'
+            className='flex flex-col items-center hover:text-primary transition-all'
+          >
+            <Image
+              src='/hotel-icon.png'
+              alt='Hotel Icon'
+              width={35}
+              height={35}
+              className='group-hover:brightness-50'
+            />
 
-          <p className='text-sm text-gray-primary'>Hotel</p>
+            <p className='text-sm text-gray-primary group-hover:text-primary'>
+              Hotel
+            </p>
+          </Link>
         </div>
 
-        <div className='flex flex-col'>
-          <Image
-            src='/farm-icon.png'
-            alt='Fazenda Icon'
-            width={35}
-            height={35}
-          />
+        <div className='group flex flex-col'>
+          <Link
+            href='/trips/search?text=Fazenda'
+            className='flex flex-col items-center hover:text-primary transition-all'
+          >
+            <Image
+              src='/farm-icon.png'
+              alt='Fazenda Icon'
+              width={35}
+              height={35}
+              className='group-hover:brightness-50'
+            />
 
-          <p className='text-sm text-gray-primary'>Fazenda</p>
+            <p className='text-sm text-gray-primary group-hover:text-primary'>
+              Fazenda
+            </p>
+          </Link>
         </div>
 
-        <div className='flex flex-col'>
-          <Image
-            src='/cottage-icon.png'
-            alt='Chalé Icon'
-            width={35}
-            height={35}
-          />
+        <div className='group flex flex-col'>
+          <Link
+            href='/trips/search?text=Chalé'
+            className='flex flex-col items-center hover:text-primary transition-all'
+          >
+            <Image
+              src='/cottage-icon.png'
+              alt='Chalé Icon'
+              width={35}
+              height={35}
+              className='group-hover:brightness-50'
+            />
 
-          <p className='text-sm text-gray-primary'>Chalé</p>
+            <p className='text-sm text-gray-primary group-hover:text-primary'>
+              Chalé
+            </p>
+          </Link>
         </div>
 
-        <div className='flex flex-col'>
-          <Image
-            src='/inn-icon.png'
-            alt='Pousada Icon'
-            width={35}
-            height={35}
-          />
+        <div className='group flex flex-col'>
+          <Link
+            href='/trips/search?text=Pousada'
+            className='flex flex-col items-center hover:text-primary transition-all'
+          >
+            <Image
+              src='/inn-icon.png'
+              alt='Pousada Icon'
+              width={35}
+              height={35}
+              className='group-hover:brightness-50'
+            />
 
-          <p className='text-sm text-gray-primary'>Pousada</p>
+            <p className='text-sm text-gray-primary group-hover:text-primary'>
+              Pousada
+            </p>
+          </Link>
         </div>
       </div>
     </div>

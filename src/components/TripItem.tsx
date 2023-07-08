@@ -24,7 +24,7 @@ export default function TripItem({ trip }: TripItemProps) {
         <h3 className='text-primary-dark font-medium text-sm mt-2'>
           {trip.name}
         </h3>
-        <div className='flex-items-center gap-1 my-1'>
+        <div className='flex items-center gap-1 my-1'>
           <ReactCountryFlag
             countryCode={trip.countryCode}
             svg
