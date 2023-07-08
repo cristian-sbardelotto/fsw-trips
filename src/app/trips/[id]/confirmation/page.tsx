@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 import Button from '@/components/Button';
 import TripConfirmationCard from '@/components/TripConfirmationCard';
 import { Trip } from '@prisma/client';
+import { loadStripe } from '@stripe/stripe-js';
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 import { toast } from 'react-toastify';
@@ -59,22 +60,24 @@ export default function TripConfirmation({ params }: TripConfirmationProps) {
   if (!trip) return null;
 
   async function handleFinishPurchase() {
-    const response = await fetch(
-      `http://localhost:3000/api/trips/reservation`,
-      {
-        method: 'POST',
-        body: Buffer.from(
-          JSON.stringify({
-            userId: (data?.user as any).id,
-            tripId: params.id,
-            totalPaid: totalPrice,
-            startDate: searchParams.get('startDate'),
-            endDate: searchParams.get('endDate'),
-            guests: Number(searchParams.get('guests')),
-          })
-        ),
-      }
-    );
+    const response = await fetch(`http://localhost:3000/api/payment`, {
+      method: 'POST',
+      body: Buffer.from(
+        JSON.stringify({
+          userId: (data?.user as any)?.id,
+          tripId: params.id,
+          totalPrice,
+          coverImage: trip?.coverImage,
+          startDate: searchParams.get('startDate'),
+          endDate: searchParams.get('endDate'),
+          guests: Number(searchParams.get('guests')),
+          name: trip?.name,
+          description: trip?.description,
+        })
+      ),
+    });
+
+    console.log({ response });
 
     if (!response.ok) {
       return toast.error('Ocorreu um erro ao realizar a reserva!', {
@@ -82,7 +85,15 @@ export default function TripConfirmation({ params }: TripConfirmationProps) {
       });
     }
 
-    router.push('/');
+    const { sessionId } = await response.json();
+
+    const stripe = await loadStripe(
+      process.env.NEXT_PUBLIC_STRIPE_KEY as string
+    );
+
+    await stripe?.redirectToCheckout({ sessionId });
+
+    // router.push('/');
 
     toast.success('Reserva realizada com sucesso!', {
       position: 'top-right',
