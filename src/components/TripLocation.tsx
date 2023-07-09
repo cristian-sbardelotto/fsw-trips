@@ -23,16 +23,26 @@ export default function TripLocation({
         />
       </div>
 
-      <h3 className='text-primary-dark text-sm font-semibold mt-3'>
+      <div className='relative h-[480px] w-full hidden lg:block'>
+        <Image
+          src='/map-desktop.png'
+          alt={tripLocation}
+          fill
+          className='rounded-lg shadow-md object-cover'
+        />
+      </div>
+
+      <h3 className='text-primary-dark text-sm font-semibold mt-3 lg:text-base lg:mt-5'>
         {tripLocation}
       </h3>
-      <p className='text-xs text-primary-dark mt-3 leading-5'>
+
+      <p className='text-xs text-primary-dark mt-3 leading-5 lg:text-sm lg:mt-4'>
         {tripLocationDescription}
       </p>
 
       <Button
         variant='outline'
-        className='w-full mt-5'
+        className='w-full mt-5 lg:max-w-[300px]'
       >
         Ver no Google Maps
       </Button>
