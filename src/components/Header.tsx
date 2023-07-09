@@ -27,7 +27,7 @@ export function Header() {
   }
 
   return (
-    <header className='container mx-auto px-5 h-[93px] flex justify-between items-center'>
+    <header className='container mx-auto px-5 h-[93px] flex justify-between items-center lg:border-b lg:border-gray-light'>
       <Link href='/'>
         <Image
           src='/fsw-logo.svg'

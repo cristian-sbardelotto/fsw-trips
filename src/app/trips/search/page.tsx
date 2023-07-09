@@ -28,7 +28,7 @@ export default function TripSearchResult() {
   }, [searchParams]);
 
   return (
-    <div className='container mx-auto flex flex-col items-center p-5 lg:items-start'>
+    <div className='container mx-auto flex flex-col items-center p-5 lg:items-start lg:pt-10'>
       <div className='border-b border-gray-light text-center mb-6'>
         <h1 className='text-primary-dark font-semibold text-xl lg:w-full lg:text-left lg:text-[2.5rem]'>
           Hospedagens encontradas

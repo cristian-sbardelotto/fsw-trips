@@ -76,7 +76,7 @@ export default function TripSearch() {
 
         <Button
           onClick={() => handleSubmit(onSubmit)()}
-          className='lg:w-1/2 w-full'
+          className='lg:w-1/2 w-full lg:h-fit'
         >
           Buscar
         </Button>

@@ -23,7 +23,7 @@ export default async function TripDetails({ params }: TripDetailsProps) {
   if (!trip) return null;
 
   return (
-    <div className='container mx-auto lg:px-40'>
+    <div className='container mx-auto lg:px-40 lg:pt-10'>
       <TripDetailsHeader trip={trip} />
 
       <div className='flex flex-col lg:flex-row lg:mt-12 lg:gap-20'>
