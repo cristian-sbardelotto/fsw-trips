@@ -85,7 +85,11 @@ export default function TripReservation({ trip }: TripReservationProps) {
   }
 
   return (
-    <div className='flex flex-col px-5'>
+    <div className='flex flex-col px-5 lg:min-w-[380px] lg:p-5 lg:border lg:border-gray-light lg:rounded-lg lg:shadow-md'>
+      <p className='text-xl hidden text-primaryDarker mb-4 lg:block'>
+        <span className='font-semibold'>R${+trip.pricePerDay}</span> / dia
+      </p>
+
       <div className='flex gap-4'>
         <Controller
           name='startDate'
@@ -160,7 +164,7 @@ export default function TripReservation({ trip }: TripReservationProps) {
         </p>
       </div>
 
-      <div className='pb-10 border-b border-b-gray-light w-full'>
+      <div className='pb-10 border-b border-b-gray-light w-full lg:border-none lg:pb-0'>
         <Button
           onClick={() => handleSubmit(onSubmit)()}
           className='mt-3'
