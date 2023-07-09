@@ -12,7 +12,7 @@ export default function TripSearchResult() {
 
   useEffect(() => {
     async function fetchTrips() {
-      const searchUrl = `${process.env.HOST_URL}api/trips/search?text=${
+      const searchUrl = `http://localhost:3000/api/trips/search?text=${
         searchParams.get('text') ?? ''
       }&startDate=${searchParams.get('startDate')}&budget=${searchParams.get(
         'budget'

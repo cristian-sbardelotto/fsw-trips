@@ -25,7 +25,7 @@ export async function POST(request: Request) {
   const TOTAL_PRICE_IN_BRL = totalPrice * 100;
 
   const session = await stripe.checkout.sessions.create({
-    success_url: process.env.HOST_URL!,
+    success_url: 'http://localhost:3000',
     metadata: {
       tripId,
       userId: (userSession?.user as any)?.id,

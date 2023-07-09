@@ -33,7 +33,7 @@ export default function TripConfirmation({ params }: TripConfirmationProps) {
 
   useEffect(() => {
     async function fetchTrip() {
-      const response = await fetch(`${process.env.HOST_URL}api/trips/check`, {
+      const response = await fetch('http://localhost:3000/api/trips/check', {
         method: 'POST',
         body: JSON.stringify({
           tripId: params.id,
@@ -60,7 +60,7 @@ export default function TripConfirmation({ params }: TripConfirmationProps) {
   if (!trip) return null;
 
   async function handleFinishPurchase() {
-    const response = await fetch(`${process.env.HOST_URL}api/payment`, {
+    const response = await fetch('http://localhost:3000/api/payment', {
       method: 'POST',
       body: Buffer.from(
         JSON.stringify({
