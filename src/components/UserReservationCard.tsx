@@ -6,7 +6,6 @@ import { ptBR } from 'date-fns/locale';
 import ReactCountryFlag from 'react-country-flag';
 
 import Button from '@/components/Button';
-import { useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';
 
 type UserReservationCardProps = {
@@ -22,12 +21,13 @@ export default function UserReservationCard({
 }: UserReservationCardProps) {
   const { trip } = reservation;
 
-  const router = useRouter();
-
   async function handleDeleteReservation() {
-    const response = await fetch(`/api/trips/reservation/${reservation.id}`, {
-      method: 'DELETE',
-    });
+    const response = await fetch(
+      `http://localhost:3000/api/trips/reservation/${reservation.id}`,
+      {
+        method: 'DELETE',
+      }
+    );
 
     if (!response.ok) {
       return toast.error('Ocorreu um erro ao cancelar a reserva!');

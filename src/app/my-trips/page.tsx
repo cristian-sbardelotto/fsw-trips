@@ -21,7 +21,7 @@ export default function MyTrips() {
 
   async function fetchReservations() {
     const response = await fetch(
-      `/api/user/${(data?.user as any)?.id}/reservations`
+      `http://localhost:3000/api/user/${(data?.user as any)?.id}/reservations`
     ).then(response => response.json());
 
     setReservations(response);
@@ -37,26 +37,28 @@ export default function MyTrips() {
 
   return (
     <div className='container mx-auto p-5'>
-      <h1 className='font-semibold text-primary-dark text-xl'>
+      <h1 className='font-semibold text-primary-dark text-xl lg:mb-5'>
         Minhas Viagens
       </h1>
 
       {reservations.length > 0 ? (
-        reservations?.map(reservation => (
-          <UserReservationCard
-            key={reservation.id}
-            reservation={reservation}
-            fetchReservations={fetchReservations}
-          />
-        ))
+        <div className='flex flex-col lg:grid lg:grid-cols-3 lg:gap-14'>
+          {reservations?.map(reservation => (
+            <UserReservationCard
+              key={reservation.id}
+              reservation={reservation}
+              fetchReservations={fetchReservations}
+            />
+          ))}
+        </div>
       ) : (
-        <div className='flex flex-col'>
+        <div className='flex flex-col lg:max-w-[500px]'>
           <p className='mt-2 font-medium text-primary-dark'>
             Você ainda não tem nenhuma reserva! =(
           </p>
 
           <Link href='/'>
-            <Button className='w-full mt-2'>Fazer reserva</Button>
+            <Button className='w-full mt-2 lg:mt-5'>Fazer reserva</Button>
           </Link>
         </div>
       )}

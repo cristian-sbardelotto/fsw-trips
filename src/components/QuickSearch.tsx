@@ -14,7 +14,7 @@ export default function QuickSearch() {
         <div className='w-full h-[1px] bg-gray-light' />
       </div>
 
-      <div className='flex items-center justify-between w-full mt-5'>
+      <div className='flex items-center justify-between w-full mt-5 lg:mt-10 lg:justify-center lg:gap-40'>
         <div className='group flex flex-col'>
           <Link
             href='/trips/search?text=Hotel'
@@ -28,7 +28,7 @@ export default function QuickSearch() {
               className='group-hover:brightness-50'
             />
 
-            <p className='text-sm text-gray-primary group-hover:text-primary'>
+            <p className='text-sm text-gray-primary group-hover:text-primary lg:text-base'>
               Hotel
             </p>
           </Link>
@@ -47,7 +47,7 @@ export default function QuickSearch() {
               className='group-hover:brightness-50'
             />
 
-            <p className='text-sm text-gray-primary group-hover:text-primary'>
+            <p className='text-sm text-gray-primary group-hover:text-primary lg:text-base'>
               Fazenda
             </p>
           </Link>
@@ -66,7 +66,7 @@ export default function QuickSearch() {
               className='group-hover:brightness-50'
             />
 
-            <p className='text-sm text-gray-primary group-hover:text-primary'>
+            <p className='text-sm text-gray-primary group-hover:text-primary lg:text-base'>
               Chalé
             </p>
           </Link>
@@ -85,7 +85,7 @@ export default function QuickSearch() {
               className='group-hover:brightness-50'
             />
 
-            <p className='text-sm text-gray-primary group-hover:text-primary'>
+            <p className='text-sm text-gray-primary group-hover:text-primary lg:text-base'>
               Pousada
             </p>
           </Link>
