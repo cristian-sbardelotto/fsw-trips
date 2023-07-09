@@ -93,15 +93,13 @@ export default function TripConfirmation({ params }: TripConfirmationProps) {
 
     await stripe?.redirectToCheckout({ sessionId });
 
-    // router.push('/');
-
     toast.success('Reserva realizada com sucesso!', {
       position: 'top-right',
     });
   }
 
   return (
-    <div className='container mx-auto p-5'>
+    <div className='container mx-auto p-5 lg:max-w-[600px]'>
       <h1 className='font-semibold text-xl text-primary-dark'>Sua viagem</h1>
 
       <TripConfirmationCard
