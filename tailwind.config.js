@@ -11,6 +11,10 @@ module.exports = {
         'world-map': 'url(/world-map.png)',
       },
 
+      backgroundColor: {
+        'shadow-transparent': '#3336',
+      },
+
       colors: {
         primary: '#590BD8',
         'primary-dark': '#312A4F',
