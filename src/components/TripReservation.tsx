@@ -6,6 +6,7 @@ import { Trip } from '@prisma/client';
 import { differenceInDays } from 'date-fns';
 import { Controller, useForm } from 'react-hook-form';
 
+import { useFormattedNumber } from '@/hooks/useFormattedNumber';
 import Button from './Button';
 import DatePicker from './DatePicker';
 import Input from './Input';
@@ -31,6 +32,12 @@ export default function TripReservation({ trip }: TripReservationProps) {
   } = useForm<FormProps>();
 
   const router = useRouter();
+
+  const formattedPricePerDay = useFormattedNumber({
+    number: +trip.pricePerDay,
+    currency: 'BRL',
+    locale: 'pt-BR',
+  });
 
   async function onSubmit(data: FormProps) {
     const response = await fetch('http://localhost:3000/api/trips/check', {
@@ -79,15 +86,21 @@ export default function TripReservation({ trip }: TripReservationProps) {
   const endDate = watch('endDate');
 
   function calculateTotalReservationAmount() {
-    return (
-      differenceInDays(Number(endDate), Number(startDate)) * +trip.pricePerDay
-    );
+    const formattedReservationAmount = useFormattedNumber({
+      number:
+        differenceInDays(Number(endDate), Number(startDate)) *
+        +trip.pricePerDay,
+      currency: 'BRL',
+      locale: 'pt-BR',
+    });
+
+    return formattedReservationAmount;
   }
 
   return (
     <div className='flex flex-col px-5 lg:min-w-[380px] lg:p-5 lg:border lg:border-gray-light lg:rounded-lg lg:shadow-md'>
       <p className='text-xl hidden text-primaryDarker mb-4 lg:block'>
-        <span className='font-semibold'>R${+trip.pricePerDay}</span> / dia
+        <span className='font-semibold'>{formattedPricePerDay}</span> / dia
       </p>
 
       <div className='flex gap-4'>
@@ -159,8 +172,7 @@ export default function TripReservation({ trip }: TripReservationProps) {
       <div className='flex justify-between mt-3'>
         <p className='font-medium text-sm text-primary-dark'>Total: </p>
         <p className='font-medium text-sm text-primary-dark'>
-          R$
-          {startDate && endDate ? calculateTotalReservationAmount() : '0'}
+          {startDate && endDate ? calculateTotalReservationAmount() : 'R$ 0'}
         </p>
       </div>
 

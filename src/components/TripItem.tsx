@@ -1,7 +1,9 @@
-import { Trip } from '@prisma/client';
 import Image from 'next/image';
 import Link from 'next/link';
 
+import { useFormattedNumber } from '@/hooks/useFormattedNumber';
+
+import { Trip } from '@prisma/client';
 import ReactCountryFlag from 'react-country-flag';
 
 type TripItemProps = {
@@ -9,6 +11,12 @@ type TripItemProps = {
 };
 
 export default function TripItem({ trip }: TripItemProps) {
+  const formattedPricePerDay = useFormattedNumber({
+    number: +trip.pricePerDay,
+    currency: 'BRL',
+    locale: 'pt-BR',
+  });
+
   return (
     <Link href={`/trips/${trip.id}`}>
       <div className='group flex flex-col'>
@@ -35,7 +43,7 @@ export default function TripItem({ trip }: TripItemProps) {
 
         <p className='text-xs text-gray-primary'>
           <span className='text-primary font-medium'>
-            R${String(trip.pricePerDay)}
+            {formattedPricePerDay}
           </span>{' '}
           por dia
         </p>

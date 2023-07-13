@@ -1,5 +1,8 @@
-import { Trip } from '@prisma/client';
 import Image from 'next/image';
+
+import { useFormattedNumber } from '@/hooks/useFormattedNumber';
+
+import { Trip } from '@prisma/client';
 import ReactCountryFlag from 'react-country-flag';
 
 type TripDetailsHeader = {
@@ -7,6 +10,12 @@ type TripDetailsHeader = {
 };
 
 export default function TripDetailsHeader({ trip }: TripDetailsHeader) {
+  const formattedPricePerDay = useFormattedNumber({
+    number: +trip.pricePerDay,
+    currency: 'BRL',
+    locale: 'pt-BR',
+  });
+
   return (
     <div className='flex flex-col'>
       <div className='relative h-[300px] w-full lg:hidden'>
@@ -82,7 +91,7 @@ export default function TripDetailsHeader({ trip }: TripDetailsHeader) {
 
         <p className='text-xs text-gray-primary lg:hidden'>
           <span className='text-primary font-medium'>
-            R${String(trip.pricePerDay)}
+            {formattedPricePerDay}
           </span>{' '}
           por dia
         </p>
