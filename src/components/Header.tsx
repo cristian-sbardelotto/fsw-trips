@@ -6,7 +6,7 @@ import { signIn, signOut, useSession } from 'next-auth/react';
 import Image from 'next/image';
 
 import Link from 'next/link';
-import { AiOutlineMenu } from 'react-icons/ai';
+import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai';
 
 function handleLogin() {
   signIn();
@@ -22,7 +22,7 @@ export function Header() {
   const { data, status } = useSession();
   const isUserLogged = status === 'authenticated';
 
-  function handleOpenMenu() {
+  function handleSetMenu() {
     setIsMenuOpen(!isMenuOpen);
   }
 
@@ -39,11 +39,19 @@ export function Header() {
 
       {isUserLogged && data?.user ? (
         <div className='flex items-center gap-3 border border-gray-light p-3 rounded-full relative'>
-          <AiOutlineMenu
-            size={16}
-            onClick={handleOpenMenu}
-            className='cursor-pointer'
-          />
+          {isMenuOpen ? (
+            <AiOutlineClose
+              size={16}
+              onClick={handleSetMenu}
+              className='cursor-pointer'
+            />
+          ) : (
+            <AiOutlineMenu
+              size={16}
+              onClick={handleSetMenu}
+              className='cursor-pointer'
+            />
+          )}
 
           <Image
             src={data.user.image!}
