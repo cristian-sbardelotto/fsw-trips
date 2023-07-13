@@ -1,7 +1,9 @@
-import { Trip } from '@prisma/client';
 import Image from 'next/image';
 import Link from 'next/link';
 
+import { useFormattedNumber } from '@/hooks/useFormattedNumber';
+
+import { Trip } from '@prisma/client';
 import ReactCountryFlag from 'react-country-flag';
 
 type TripItemProps = {
@@ -9,14 +11,20 @@ type TripItemProps = {
 };
 
 export default function TripItem({ trip }: TripItemProps) {
+  const formattedPricePerDay = useFormattedNumber({
+    number: +trip.pricePerDay,
+    currency: 'BRL',
+    locale: 'pt-BR',
+  });
+
   return (
     <Link href={`/trips/${trip.id}`}>
-      <div className='flex flex-col'>
-        <div className='relative h-[280px] w-[280px]'>
+      <div className='group flex flex-col'>
+        <div className='relative h-[280px] w-[280px] rounded-lg overflow-hidden'>
           <Image
             src={trip.coverImage}
             alt={trip.name}
-            className='rounded-lg shadow-md object-cover'
+            className='shadow-md object-cover transition-all duration-300 group-hover:scale-110 group-hover:grayscale'
             fill
           />
         </div>
@@ -24,6 +32,7 @@ export default function TripItem({ trip }: TripItemProps) {
         <h3 className='text-primary-dark font-medium text-sm mt-2'>
           {trip.name}
         </h3>
+
         <div className='flex items-center gap-1 my-1'>
           <ReactCountryFlag
             countryCode={trip.countryCode}
@@ -34,7 +43,7 @@ export default function TripItem({ trip }: TripItemProps) {
 
         <p className='text-xs text-gray-primary'>
           <span className='text-primary font-medium'>
-            R${String(trip.pricePerDay)}
+            {formattedPricePerDay}
           </span>{' '}
           por dia
         </p>

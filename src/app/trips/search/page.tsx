@@ -27,6 +27,8 @@ export default function TripSearchResult() {
     fetchTrips();
   }, [searchParams]);
 
+  const textParam = searchParams.get('text');
+
   return (
     <div className='container mx-auto flex flex-col items-center p-5 lg:items-start lg:pt-10'>
       <div className='border-b border-gray-light text-center mb-6'>
@@ -34,9 +36,13 @@ export default function TripSearchResult() {
           Hospedagens encontradas
         </h1>
 
-        <h2 className='text-gray-primary fonte-medium mb-6 lg:mt-6 lg:w-full lg:text-left'>
-          Listamos as melhores viagens pra você!
+        <h2 className='text-primary-dark font-semibold text-lg lg:w-full lg:text-left lg:text-[2rem] lg:mt-6'>
+          Resultados para "{textParam}"
         </h2>
+
+        <h3 className='text-gray-primary fonte-medium mb-6 lg:mt-6 lg:w-full lg:text-left'>
+          Listamos as melhores viagens pra você!
+        </h3>
       </div>
 
       {trips && trips?.length > 0 ? (

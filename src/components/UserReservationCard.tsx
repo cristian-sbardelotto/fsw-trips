@@ -9,6 +9,7 @@ import { ptBR } from 'date-fns/locale';
 import ReactCountryFlag from 'react-country-flag';
 
 import Button from '@/components/Button';
+import { useFormattedNumber } from '@/hooks/useFormattedNumber';
 import { toast } from 'react-toastify';
 import TripCancellationModal from './TripCancellationModal';
 
@@ -44,6 +45,12 @@ export default function UserReservationCard({
     toast.success('Reserva cancelada com sucesso!', { position: 'top-right' });
     fetchReservations();
   }
+
+  const formattedTotalPaid = useFormattedNumber({
+    number: +reservation.totalPaid,
+    currency: 'BRL',
+    locale: 'pt-BR',
+  });
 
   return (
     <div className='flex flex-col p-5 mt-5 border border-gray-light shadow-lg rounded-lg'>
@@ -106,9 +113,9 @@ export default function UserReservationCard({
           Informações sobre o preço
         </h3>
 
-        <div className='flex justify-between mt-1'>
+        <div className='flex items-center justify-between mt-1'>
           <p className='text-primary-dark text-sm mt-2'>Total:</p>
-          <p className='font-medium text-sm'>R${+reservation.totalPaid}</p>
+          <p className='font-medium text-sm'>{formattedTotalPaid}</p>
         </div>
 
         <Button

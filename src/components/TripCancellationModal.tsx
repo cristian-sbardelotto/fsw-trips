@@ -33,6 +33,7 @@ export default function TripCancellationModal({
 
           <Button
             onClick={onCancel}
+            variant='outline'
             className=' lg:max-w-[25%]'
           >
             Cancelar
