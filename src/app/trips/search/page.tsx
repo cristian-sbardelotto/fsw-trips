@@ -19,7 +19,6 @@ export default function TripSearchResult() {
       )}`;
 
       const response = await fetch(searchUrl).then(response => response.json());
-      console.log(response);
 
       setTrips(response);
     }

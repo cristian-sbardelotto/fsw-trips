@@ -77,8 +77,6 @@ export default function TripConfirmation({ params }: TripConfirmationProps) {
       ),
     });
 
-    console.log({ response });
-
     if (!response.ok) {
       return toast.error('Ocorreu um erro ao realizar a reserva!', {
         position: 'top-right',
